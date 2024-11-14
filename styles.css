@@ -1,0 +1,229 @@
+/* General Styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f5f8fb;
+    color: #333;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Header Section */
+.header {
+    display: flex;
+    align-items: center;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #eee;
+}
+
+.profile-image {
+    width: 100px;
+    height: 100px;
+    background-color: #d1d8e0;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+
+.profile-info h1 {
+    font-size: 2em;
+    color: #2d3748;
+}
+
+.profile-info p {
+    font-size: 1em;
+    color: #555;
+}
+
+/* Section Styling */
+section {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f9f9fb;
+    border-radius: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+section:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+h2 {
+    font-size: 1.5em;
+    color: #2d3748;
+    margin-bottom: 10px;
+}
+
+/* Timeline for Education */
+.timeline {
+    position: relative;
+    padding-left: 20px;
+    border-left: 3px solid #4a90e2;
+}
+
+.timeline-item {
+    margin-bottom: 15px;
+    padding-left: 10px;
+}
+
+.timeline-item .dot {
+    position: absolute;
+    left: -5px;
+    width: 10px;
+    height: 10px;
+    background-color: #4a90e2;
+    border-radius: 50%;
+}
+
+/* Skills Pool */
+.skills-pool {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.skills-pool span {
+    background-color: #e0f7fa;
+    padding: 8px 12px;
+    border-radius: 12px;
+    font-size: 0.9em;
+    color: #00796b;
+}
+
+/* Language Bars */
+.language-bar p {
+    display: flex;
+    align-items: center;
+    font-size: 1em;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.language-bar .bar {
+    flex-grow: 1;
+    height: 8px;
+    margin-left: 10px;
+    border-radius: 4px;
+    background-color: #e0e0e0;
+}
+
+.language-bar .bar.full { width: 100%; background-color: #4caf50; }
+.language-bar .bar.high { width: 80%; background-color: #8bc34a; }
+.language-bar .bar.medium { width: 60%; background-color: #cddc39; }
+.language-bar .bar.low { width: 40%; background-color: #ffc107; }
+
+/* Interests with Icons */
+.interests ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.interests li {
+    display: flex;
+    align-items: center;
+    font-size: 1em;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+.interests li i {
+    margin-right: 10px;
+    color: #4a90e2;
+}
+
+/* Dark Mode Styling */
+body.dark-mode {
+    background-color: #333;
+    color: #f5f8fb;
+}
+
+body.dark-mode .container {
+    background-color: #444;
+    color: #f5f8fb;
+}
+
+body.dark-mode .profile-info h1 {
+    color: #f5f8fb;
+}
+
+body.dark-mode section {
+    background-color: #555;
+    color: #f5f8fb;
+}
+
+body.dark-mode .language-bar p {
+    color: #f5f8fb;
+}
+
+/* Mode Toggle Button */
+.mode-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 100;
+}
+
+.mode-toggle input {
+    display: none;
+}
+
+.mode-toggle i {
+    font-size: 1.5em;
+    cursor: pointer;
+    color: #f5f8fb;
+    transition: transform 0.3s ease;
+}
+
+.mode-toggle i:hover {
+    transform: scale(1.2);
+}
+
+.mode-toggle input:checked + #moon-icon {
+    display: none;
+}
+
+.mode-toggle input:not(:checked) + #sun-icon {
+    display: none;
+}
+
+/* Scroll to Top Button */
+#scroll-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 15px;
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 1.5em;
+    cursor: pointer;
+    display: none;
+    transition: opacity 0.3s ease;
+}
+
+#scroll-to-top:hover {
+    opacity: 0.7;
+}
+
+/* Show Scroll Button when Scrolling */
+body.scrolled #scroll-to-top {
+    display: block;
+}
