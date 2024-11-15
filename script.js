@@ -13,16 +13,24 @@ menuLinks.forEach((link) => {
 const hamburgerIcon = document.getElementById('hamburger-icon');
 const menu = document.getElementById('menu');
 
-hamburgerIcon.addEventListener('click', () => {
+hamburgerIcon.addEventListener('click', (e) => {
+    e.stopPropagation();
     menu.classList.toggle('show-menu');
-});
-
-menu.addEventListener('click', (e) => {
-    if (e.target.classList.contains('menu')) {
-        menu.classList.remove('show-menu');
+    const icon = hamburgerIcon.querySelector('i');
+    if (menu.classList.contains('show-menu')) {
+        icon.classList.replace('fa-bars', 'fa-times');
+    } else {
+        icon.classList.replace('fa-times', 'fa-bars');
     }
 });
 
+document.addEventListener('click', (e) => {
+    if (!menu.contains(e.target) && !hamburgerIcon.contains(e.target)) {
+        menu.classList.remove('show-menu');
+        const icon = hamburgerIcon.querySelector('i');
+        icon.classList.replace('fa-times', 'fa-bars');
+    }
+});
 
 const scrollButton = document.getElementById('scrollToTopBtn');
 
@@ -321,6 +329,9 @@ function updateContent(lang) {
     traitsSpans[6].textContent = translations[lang].helpful;
     traitsSpans[7].textContent = translations[lang].independent;
     traitsSpans[8].textContent = translations[lang].flexible;
+
+    // Fix the skills section title translation
+    document.querySelector('.skills h2').textContent = translations[lang].skills;
 }
 
 // Initialize with saved language

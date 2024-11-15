@@ -253,8 +253,8 @@ a {
 /* Menu styles */
 .hamburger-icon {
     position: fixed;
-    top: 20px;
-    left: 20px;
+    top: 30px;
+    left: 30px;
     width: 40px;
     height: 40px;
     background-color: #1a1a1a;
@@ -281,23 +281,22 @@ a {
   }
   
  .menu {
-    margin: 10px;
-     position: fixed;
-     top: 60px;
-     left: 0;
-     width: 210px;
-     height: 10 px;
-     background-color: #1a1a1a;
-     padding: 20px;
-     opacity: 0;
-     transform: translateX(-100%);
-     transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s linear 0.3s;
-     visibility: hidden;
-     border-radius: 5px;
-     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3),
+    position: fixed;
+    top: 30px;
+    left: 85px;
+    width: 220px;  /* Reduced width */
+    background-color: #1a1a1a;
+    padding: 15px;  /* Reduced padding */
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    visibility: hidden;
+    border-radius: 8px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3),
                 0 0 15px rgba(74, 144, 226, 0.1);
-     border: 1px solid rgba(74, 144, 226, 0.1);
- }
+    border: 1px solid rgba(74, 144, 226, 0.1);
+    z-index: 999;
+}
   
   .menu ul {
     list-style: none;
@@ -326,7 +325,6 @@ a {
     opacity: 1;
     transform: translateX(0);
     visibility: visible;
-    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s linear 0s;
 }
 
 .ani a:hover {
@@ -533,13 +531,18 @@ html {
 .hamburger-icon i {
     color: #4a90e2;  /* Blue color for the bars icon */
     font-size: 20px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hamburger-icon.active i {
+    transform: rotate(180deg);
 }
 
 /* Add the theme toggle button styles */
 .theme-toggle {
     position: fixed;
-    top: 20px;
-    left: 70px; /* Position it next to hamburger */
+    top: 80px;
+    left: 30px;
     width: 40px;
     height: 40px;
     background-color: #1a1a1a;
@@ -622,8 +625,8 @@ body.light-mode .menu a {
 /* Add the language toggle button styles */
 .language-toggle {
     position: fixed;
-    top: 20px;
-    right: 20px; /* Changed from left: 120px to right: 20px */
+    top: 30px;
+    right: 30px;
     width: 40px;
     height: 40px;
     background-color: #1a1a1a;
@@ -651,4 +654,55 @@ body.light-mode .menu a {
 /* Light mode styles for language toggle */
 body.light-mode .language-toggle {
     background-color: #f8f9fa;
+}
+
+/* Update menu styles */
+.menu {
+    position: fixed;
+    top: 30px;
+    left: 85px;
+    width: 220px;  /* Reduced width */
+    background-color: #1a1a1a;
+    padding: 15px;  /* Reduced padding */
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    visibility: hidden;
+    border-radius: 8px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3),
+                0 0 15px rgba(74, 144, 226, 0.1);
+    border: 1px solid rgba(74, 144, 226, 0.1);
+    z-index: 999;
+}
+
+.menu.show-menu {
+    opacity: 1;
+    transform: translateX(0);
+    visibility: visible;
+    pointer-events: auto;
+}
+
+/* Ensure menu items are visible */
+.menu-item {
+    padding: 6px 0;    /* Reduced padding */
+    margin: 2px 0;     /* Reduced margin */
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    opacity: 1;
+}
+
+.menu-item a {
+    color: #e0e0e0;
+    text-decoration: none;
+    display: block;
+    padding: 6px 12px;  /* Reduced padding */
+    transition: all 0.3s ease;
+    border-radius: 5px;
+}
+
+.menu-item a:hover {
+    color: #4a90e2;
+    background-color: rgba(74, 144, 226, 0.1);
+    text-shadow: 0 0 10px rgba(74, 144, 226, 0.3);
+    transform: translateX(5px);
 }
