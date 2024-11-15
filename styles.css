@@ -23,6 +23,17 @@ body {
 
 /* Header Section */
 
+svg {
+    width: 28.4px;
+    height: 28.4px;
+    margin-bottom: -2px;
+    color : #ffffff;
+    background-color: #4a90e2;
+    padding: -2px;  
+    border-radius: 3px;
+}
+
+
 .header {
     display: flex;
     align-items: center;
@@ -71,11 +82,16 @@ h2 {
     margin-bottom: 10px;
 }
 
+a {
+    text-decoration: none;
+}
+
 /* Timeline for Education */
 .timeline {
     position: relative;
     padding-left: 20px;
-    border-left: 3px solid #4a90e2;
+    border-left: 3px dotted #4a90e2;
+    
 }
 
 .timeline-item {
@@ -198,13 +214,13 @@ h2 {
     color: #b0b0b0;
 }
 
-a {
+.email {
     color: #4a90e2;
     text-decoration: none;
     transition: color 0.3s ease;
 }
 
-a:hover {
+.email:hover {
     text-decoration: underline;
 }
 
@@ -222,6 +238,7 @@ a:hover {
     align-items: center;
     cursor: pointer;
     z-index: 1000;
+    border-radius: 5px;
   }
   
   .hamburger-icon span {
