@@ -8,29 +8,33 @@
 }
 
 body {
-    background-color: #121212;  /* Dark background color */
-    color: #e0e0e0;  /* Light text color for dark mode */
+    background-color: #0a0a0a;  /* Darker background */
+    color: #e0e0e0;
+    overflow-y: scroll;
 }
 
 .container {
     max-width: 1000px;
     margin: 20px auto;
     padding: 20px;
-    background-color: #1e1e1e;  /* Dark container background */
-    border-radius: 12px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    background-color: #141414;  /* Darker container */
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3),
+                0 0 20px rgba(74, 144, 226, 0.1);  /* Added blue glow */
+    border: 1px solid rgba(74, 144, 226, 0.1);  /* Subtle blue border */
 }
 
 /* Header Section */
 
 svg {
-    width: 28.4px;
-    height: 28.4px;
-    margin-bottom: -2px;
+    width: 28.6px;
+    height: 28.6px;
+    margin-bottom: 1.2px;
     color : #ffffff;
-    background-color: #4a90e2;
+    background: linear-gradient(45deg, #4a90e2, #357abd);
     padding: -2px;  
     border-radius: 3px;
+    box-shadow: 0 0 10px rgba(74, 144, 226, 0.2);
 }
 
 
@@ -38,16 +42,25 @@ svg {
     display: flex;
     align-items: center;
     padding-bottom: 20px;
-    border-bottom: 2px solid #333;  /* Dark border */
+    border-bottom: 2px solid rgba(74, 144, 226, 0.2);  /* Glowing border */
 }
 
 /* Header Section */
 .profile-image {
     width: 100px;
     height: 100px;
-    background-color: #d1d8e0;
     border-radius: 50%;
     margin-right: 20px;
+    box-shadow: 0 0 20px rgba(74, 144, 226, 0.2);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 2px solid rgba(74, 144, 226, 0.2);
+    cursor: pointer;
+}
+
+.profile-image:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 30px rgba(74, 144, 226, 0.4);
+    border-color: rgba(74, 144, 226, 0.4);
 }
 
 /* Header Info */
@@ -64,16 +77,19 @@ svg {
 /* Section Styling */
 section {
     margin-top: 20px;
-    padding: 15px;
-    background-color: #333;  /* Dark section background */
+    padding: 20px;
+    background-color: #1a1a1a;  /* Slightly lighter than container */
     border-radius: 16px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(74, 144, 226, 0.1);
 }
 
 section:hover {
-    transform: scale(1.05);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3),
+                0 0 20px rgba(74, 144, 226, 0.2);
+    border: 1px solid rgba(74, 144, 226, 0.2);
 }
 
 h2 {
@@ -90,7 +106,7 @@ a {
 .timeline {
     position: relative;
     padding-left: 20px;
-    border-left: 3px dotted #4a90e2;
+    border-left: 3px solid rgba(74, 144, 226, 0.3);
     
 }
 
@@ -104,8 +120,9 @@ a {
     left: -5.9px;
     width: 10px;
     height: 10px;
-    background-color: #4a90e2;
+    background: linear-gradient(45deg, #4a90e2, #357abd);
     border-radius: 50%;
+    box-shadow: 0 0 10px rgba(74, 144, 226, 0.3);
 }
 
 .description {
@@ -121,17 +138,20 @@ a {
 }
 
 .skills-pool span {
-    background-color: #444;  /* Dark background for skills */
-    padding: 8px 12px;
+    background-color: #232323;
+    padding: 10px 15px;
     border-radius: 12px;
     font-size: 0.9em;
-    color: #4a90e2;  /* Light teal color */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    color: #4a90e2;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(74, 144, 226, 0.1);
 }
 
 .skills-pool span:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(74, 144, 226, 0.2);
+    background-color: #2a2a2a;
+    border-color: rgba(74, 144, 226, 0.3);
 }
 
 /* Sprachkenntnis-Container */
@@ -153,10 +173,11 @@ a {
 /* Grundstruktur des Balkens */
 .language-bar .bar {
     flex-grow: 1;
-    height: 8px;
+    height: 10px;
     border-radius: 4px;
-    background-color: #b0b0b0;
+    background-color: #232323;
     position: relative;
+    border: 1px solid rgba(74, 144, 226, 0.1);
 }
 
 /* Füllungen für verschiedene Sprachkenntnisse */
@@ -166,6 +187,8 @@ a {
     border-radius: 4px;
     position: absolute;
     left: 0;
+    background: linear-gradient(90deg, #4a90e2, #357abd);
+    box-shadow: 0 0 10px rgba(74, 144, 226, 0.3);
 }
 
 .language-bar .fill.full {
@@ -206,6 +229,7 @@ a {
 .interests li i {
     margin-right: 10px;
     color: #4a90e2;
+    text-shadow: 0 0 10px rgba(74, 144, 226, 0.3);
 }
 
 /* Traits Section */
@@ -221,7 +245,8 @@ a {
 }
 
 .email:hover {
-    text-decoration: underline;
+    color: #4a90e2;
+    text-shadow: 0 0 15px rgba(74, 144, 226, 0.4);
 }
 
 
@@ -232,14 +257,16 @@ a {
     left: 20px;
     width: 40px;
     height: 40px;
-    background-color: #333;
+    background-color: #1a1a1a;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
     z-index: 1000;
     border-radius: 5px;
-  }
+    border: 1px solid rgba(74, 144, 226, 0.1);
+    box-shadow: 0 0 15px rgba(74, 144, 226, 0.1);
+}
   
   .hamburger-icon span {
     width: 20px;
@@ -260,13 +287,16 @@ a {
      left: 0;
      width: 210px;
      height: 10 px;
-     background-color: #333;
+     background-color: #1a1a1a;
      padding: 20px;
      opacity: 0;
      transform: translateX(-100%);
      transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s linear 0.3s;
      visibility: hidden;
      border-radius: 5px;
+     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3),
+                0 0 15px rgba(74, 144, 226, 0.1);
+     border: 1px solid rgba(74, 144, 226, 0.1);
  }
   
   .menu ul {
@@ -289,6 +319,7 @@ a {
   
   .menu a:hover {
     color: #4a90e2;
+    text-shadow: 0 0 10px rgba(74, 144, 226, 0.3);
   }
 
 .show-menu {
@@ -301,4 +332,323 @@ a {
 .ani a:hover {
     transform: scale(1.05);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* Update the scroll-to-top button styles */
+#scrollToTopBtn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 45px;
+    height: 45px;
+    background: #1a1a1a;  /* Dark background */
+    color: #4a90e2;  /* Blue color for the arrow */
+    border: 1px solid rgba(74, 144, 226, 0.1);
+    border-radius: 50%;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 20px rgba(74, 144, 226, 0.2);
+    pointer-events: none;
+}
+
+#scrollToTopBtn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 25px rgba(74, 144, 226, 0.4);
+    border-color: rgba(74, 144, 226, 0.3);
+    background: #232323;  /* Slightly lighter dark on hover */
+}
+
+#scrollToTopBtn.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+html {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+/* Timeline dot hover effect */
+.timeline-item .dot:hover {
+    box-shadow: 0 0 10px rgba(74, 144, 226, 0.5);
+    transform: scale(1.2);
+    transition: all 0.3s ease;
+}
+
+/* Language bar hover effect */
+.language-bar .fill:hover {
+    box-shadow: 0 0 10px rgba(74, 144, 226, 0.3);
+    transition: box-shadow 0.3s ease;
+}
+
+/* Update hamburger icon hover effect */
+.hamburger-icon:hover {
+    box-shadow: 0 4px 8px rgba(74, 144, 226, 0.3);
+}
+
+/* Add these mobile-specific styles */
+@media (max-width: 768px) {
+    /* Ripple effect */
+    section {
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .ripple {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(74, 144, 226, 0.3);
+        transform: scale(0);
+        animation: ripple 0.6s linear;
+        pointer-events: none;
+        width: 100px;
+        height: 100px;
+        margin: -50px;
+    }
+    
+    @keyframes ripple {
+        to {
+            transform: scale(4);
+            opacity: 0;
+        }
+    }
+    
+    /* Adjust section hover states for mobile */
+    section:hover {
+        transform: none;
+    }
+    
+    /* Make skills more touch-friendly */
+    .skills-pool span {
+        padding: 12px 18px;
+        margin: 5px;
+    }
+
+    /* Header optimization for mobile */
+    .header {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px 10px;
+    }
+
+    .profile-image {
+        width: 120px;
+        height: 120px;
+        margin: 0 auto 20px auto;
+    }
+
+    .profile-info {
+        width: 100%;
+    }
+
+    .profile-info h1 {
+        font-size: 1.8em;
+        margin-bottom: 10px;
+    }
+
+    .profile-info p {
+        font-size: 0.95em;
+        line-height: 1.5;
+        margin: 0 auto;
+        max-width: 90%;
+    }
+
+    /* Adjust icon spacing in header */
+    .profile-info h1 a {
+        margin-left: 8px;
+        display: inline-block;
+    }
+
+    /* Container padding adjustment */
+    .container {
+        margin: 10px;
+        padding: 15px;
+    }
+}
+
+/* Add these styles for the header icons */
+.profile-info h1 a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* LinkedIn icon styles */
+.profile-info h1 a .fa-linkedin {
+    font-size: 22px;  /* Increased size for better visibility */
+    color: #141414ec;
+    background-color: #4a90e2;
+    border-radius: 3px;
+    width: 28.4px;
+    height: 28.4px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: -2px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 10px rgba(74, 144, 226, 0.2);
+    position: relative;
+    top: -2px; /* Fine-tune vertical alignment */
+}
+
+.profile-info h1 a:hover .fa-linkedin {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(74, 144, 226, 0.4);
+}
+
+/* Update the container for both icons */
+.profile-info h1 a {
+    display: inline-flex;
+    align-items: center;
+    margin-left: 5px;
+    vertical-align: middle;
+}
+
+/* Swisscom logo styles */
+.profile-info h1 a svg {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 10px rgba(74, 144, 226, 0.2);
+}
+
+.profile-info h1 a:hover svg {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(74, 144, 226, 0.4);
+}
+
+/* Update hamburger icon styles */
+.hamburger-icon i {
+    color: #4a90e2;  /* Blue color for the bars icon */
+    font-size: 20px;
+}
+
+/* Add the theme toggle button styles */
+.theme-toggle {
+    position: fixed;
+    top: 20px;
+    left: 70px; /* Position it next to hamburger */
+    width: 40px;
+    height: 40px;
+    background-color: #1a1a1a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 1000;
+    border-radius: 5px;
+    border: 1px solid rgba(74, 144, 226, 0.1);
+    box-shadow: 0 0 15px rgba(74, 144, 226, 0.1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.theme-toggle i {
+    color: #4a90e2;
+    font-size: 20px;
+    transition: transform 0.3s ease;
+}
+
+.theme-toggle:hover {
+    box-shadow: 0 4px 8px rgba(74, 144, 226, 0.3);
+}
+
+/* Light theme styles */
+body.light-mode {
+    background-color: #f0f2f5;
+    color: #333;
+}
+
+body.light-mode .container {
+    background-color: #ffffff;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1),
+                0 0 20px rgba(74, 144, 226, 0.05);
+}
+
+body.light-mode section {
+    background-color: #f8f9fa;
+    border: 1px solid rgba(74, 144, 226, 0.1);
+}
+
+body.light-mode .skills-pool span {
+    background-color: #e9ecef;
+    color: #4a90e2;
+}
+
+body.light-mode .menu,
+body.light-mode .hamburger-icon,
+body.light-mode .theme-toggle,
+body.light-mode #scrollToTopBtn {
+    background-color: #f8f9fa;
+}
+
+body.light-mode .profile-info h1 {
+    color: #333;
+}
+
+body.light-mode .profile-info p {
+    color: #666;
+}
+
+body.light-mode h2 {
+    color: #333;
+}
+
+body.light-mode .interests li,
+body.light-mode .description,
+body.light-mode .language-bar p {
+    color: #666;
+}
+
+body.light-mode .language-bar .bar {
+    background-color: #e9ecef;
+}
+
+body.light-mode .menu a {
+    color: #333;
+}
+
+/* Add the language toggle button styles */
+.language-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px; /* Changed from left: 120px to right: 20px */
+    width: 40px;
+    height: 40px;
+    background-color: #1a1a1a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 1000;
+    border-radius: 5px;
+    border: 1px solid rgba(74, 144, 226, 0.1);
+    box-shadow: 0 0 15px rgba(74, 144, 226, 0.1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.language-toggle i {
+    color: #4a90e2;
+    font-size: 20px;
+    transition: transform 0.3s ease;
+}
+
+.language-toggle:hover {
+    box-shadow: 0 4px 8px rgba(74, 144, 226, 0.3);
+}
+
+/* Light mode styles for language toggle */
+body.light-mode .language-toggle {
+    background-color: #f8f9fa;
 }
