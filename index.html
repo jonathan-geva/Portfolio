@@ -1,96 +1,164 @@
 <!DOCTYPE html>
 <html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Jonathan Geva - Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-</head>
-<body>
-
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <body>
+        <div class="hamburger-icon" id="hamburger-icon">
+            <i class="fas fa-bars"></i>
+          </div>
+      <div class="menu" id="menu">
+        <p class="menu-item"><a href="#aboutme">About me</a></p>
+        <p class="menu-item"><a href="#Kontakt">Kontakt</a></p>
+        <p class="menu-item"><a href="#education">Beruflicher Werdegang</a></p>
+        <p class="menu-item"><a href="#skills">Fähigkeiten</a></p>
+        <p class="menu-item"><a href="#languages">Sprachkenntnisse</a></p>
+        <p class="menu-item"><a href="#personal">Persönliche Interessen</a></p>
+        <p class="menu-item"><a href="#charakter">Charaktereigenschaften</a></p>
+      </div>
     <div class="container">
-        <!-- Header Section -->
-        <header class="header">
-            <div class="profile-image">
-                <img src="SF_Geva_Jonathan_02637-1x1.jpg" alt="Jonathan Geva"/>
-            </div>                             
-            <div class="profile-info">
-                <h1>Jonathan Geva</h1>
-                <p>Neugieriger und lernfreudiger Schüler mit ausgeprägtem Interesse an naturwissenschaftlichen Fächern, insbesondere an Informatik. Wurde als ICT Talent gescoutet und hat Freude daran, alleine oder gemeinsam Lösungen zu suchen. Das Wissen eignet er sich durch eigene Recherchen in seiner Freizeit und durch den ICT Campus mit anderen ICT Talenten oder den Scouts an.</p>
-            </div>
-        </header>
+      <!-- Header Section -->
+      <header class="header" id = "aboutme">
+        <img
+          class="profile-image"
+          src="SF_Geva_Jonathan_02637-1x1.jpg"
+          alt="Jonathan Geva"
+        />
+        <div class="profile-info">
+          <h1>
+            Jonathan Geva
+            <a
+              href="https://www.linkedin.com/in/jonathan-geva/"
+              target="_blank"
+            >
+              <i class="fab fa-linkedin" style="color: #ffffff"></i>
+            </a>
+          </h1>
+          <p style="color: #4a90e2">Informatiker Applikationsentwickler @ Swisscom</p>
+          <p>
+            Lernfreudiger und engagierter Schüler mit ausgeprägtem Interesse an
+            Naturwissenschaften, insbesondere Informatik. Wurde als ICT-Talent
+            gescoutet und begeistere mich für die Suche nach Lösungen – sowohl
+            eigenständig als auch im Team. Ich eigne mir mein Wissen durch
+            eigene Recherchen in meiner Freizeit an. Als Informatiker
+            Applikationsentwickler EFZ in der Swisscom möchte ich mein Interesse
+            und meine Fähigkeiten in neuen Projekten einbringen und
+            weiterentwickeln.
+          </p>
+        </div>
+      </header>
 
-        <!-- Contact Section -->
-        <section class="contact">
-            <h2>Kontakt</h2>
-            <p>Telefon: 076 773 30 78</p>
-            <p>Email: jonathangeva@gmail.com</p>
-            <p>Adresse: Römerweg 11, 4450 Sissach</p>
-            <p>Geburtstag: 3. April 2009</p>
-        </section>
+      <!-- Contact Section -->
+      <section class="contact" id = "Kontakt">
+        <h2>Kontakt</h2>
+        <p>Telefon: 076 773 30 78</p>
+        <p>
+          Email:
+          <a href="mailto:jonathangeva@gmail.com">jonathangeva@gmail.com</a>
+        </p>
+        <p>Geburtstag: 3. April 2009</p>
+      </section>
 
-        <!-- Education Section -->
-        <section class="education">
-            <h2>Bildung</h2>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <span class="dot"></span>
-                    <p><strong>2024 - Aktuell:</strong> ICT CAMPUS TALENT, Basel/Alschwil</p>
-                </div>
-                <div class="timeline-item">
-                    <span class="dot"></span>
-                    <p><strong>2021 - 2024:</strong> Swisscom - First Steps</p>
-                </div>
-            </div>
-        </section>
+      <!-- Education Section -->
+      <section class="education" id = "education">
+        <h2>Beruflicher Werdegang</h2>
+        <div class="timeline">
+          <div class="timeline-item">
+            <span class="dot"></span>
+            <p>
+              <strong>August 2024 - Aktuell:</strong> A-Team (Bank Automation)
+            </p>
+            <p class="description">
+              Arbeitet an der Automatisierung von Bankprozessen, um Effizienz und Genauigkeit zu verbessern.
+            </p>
+          </div>
 
-        <!-- Skills Section -->
-        <section class="skills">
-            <h2>Fähigkeiten</h2>
-            <div class="skills-pool">
-                <span>Scratch</span>
-                <span>HTML Basics</span>
-                <span>Fotos bearbeiten</span>
-                <span>Videos schneiden</span>
-                <span>Blender Basics</span>
-                <span>Kreativität</span>
-                <span>Mindnode</span>
-                <span>Microsoft Office Programme</span>
-            </div>
-        </section>
+        </div>
+      </section>
 
-        <!-- Languages Section -->
-        <section class="languages">
-            <h2>Sprachkenntnisse</h2>
-            <div class="language-bar">
-                <p>Deutsch <span class="bar full"></span></p>
-                <p>Englisch <span class="bar high"></span></p>
-                <p>Hebräisch <span class="bar medium"></span></p>
-                <p>Französisch <span class="bar low"></span></p>
-            </div>
-        </section>
+      <!-- Skills Section -->
+      <section class="skills id = "skills">
+        <h2>Fähigkeiten</h2>
+        <div class="skills-pool">
+          <span>Scratch</span>
+          <span>HTML</span>
+          <span>Fotos bearbeiten</span>
+          <span>Videos schneiden</span>
+          <span>Blender Basics</span>
+          <span>Kreativität</span>
+          <span>Mindnode</span>
+          <span>Microsoft Office Programme</span>
+        </div>
+      </section>
 
-        <!-- Interests Section -->
-        <section class="interests">
-            <h2>Persönliche Interessen</h2>
-            <ul>
-                <li><i class="fas fa-chess"></i> Schachclub Sissach</li>
-                <li><i class="fas fa-basketball-ball"></i> Basketball/Fußball</li>
-                <li><i class="fas fa-robot"></i> EV3 Legoroboter (World Robot Olympiad 2023)</li>
-                <li><i class="fas fa-skiing"></i> Skifahren</li>
-                <li><i class="fas fa-paint-brush"></i> Zeichnen</li>
-                <li><i class="fas fa-fish"></i> Fischen</li>
-            </ul>
-        </section>
+      <!-- Languages Section -->
+      <section class="languages" id = "languages">
+        <h2>Sprachkenntnisse</h2>
+        <div class="language-bar">
+          <p>
+            <span class="language-name">Deutsch</span
+            ><span class="bar"><span class="fill full"></span></span>
+          </p>
+          <p>
+            <span class="language-name">Hebräisch</span
+            ><span class="bar"><span class="fill full"></span></span>
+          </p>
+          <p>
+            <span class="language-name">Englisch</span
+            ><span class="bar"><span class="fill high"></span></span>
+          </p>
+          <p>
+            <span class="language-name">Französisch</span
+            ><span class="bar"><span class="fill low"></span></span>
+          </p>
+        </div>
+      </section>
 
-        <!-- Traits Section -->
-        <section class="traits">
-            <h2>Charaktereigenschaften</h2>
-            <p>Kreativ, sozial, teamfähig, humorvoll, umgänglich, schnelle Auffassungsgabe, hilfsbereit, selbstständig, flexibel</p>
-        </section>
+      <!-- Interests Section -->
+      <section class="interests" id = "personal">
+        <h2>Persönliche Interessen</h2>
+        <ul>
+          <li><i class="fas fa-chess"></i> Schach</li>
+          <li><i class="fas fa-basketball-ball"></i> Basketball/Fußball</li>
+          <li>
+            <i class="fas fa-robot"></i> EV3 Legoroboter (World Robot Olympiad
+            2023 & 2024)
+          </li>
+          <li><i class="fas fa-skiing"></i> Skifahren</li>
+          <li><i class="fas fa-code"></i> Programmieren</li>
+          <li><i class="fas fa-fish"></i> Fischen</li>
+        </ul>
+      </section>
+
+      <!-- Traits Section -->
+      <section class="traits" id = "charakter">
+        <h2>Charaktereigenschaften</h2>
+        <div class="skills-pool">
+          <span>Kreativ</span>
+          <span>Sozial</span>
+          <span>Teamfähig</span>
+          <span>Humorvoll</span>
+          <span>Umgänglich</span>
+          <span>Schnelle Auffassungsgabe</span>
+          <span>Hilfsbereit</span>
+          <span>Selbstständig</span>
+          <span>Flexibel</span>
+        </div>
+      </section>
     </div>
 
     <script src="script.js"></script>
-</body>
+  </body>
 </html>

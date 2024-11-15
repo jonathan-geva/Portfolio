@@ -3,7 +3,8 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
+    font-family: 'Inter', sans-serif;
+
 }
 
 body {
@@ -12,7 +13,7 @@ body {
 }
 
 .container {
-    max-width: 800px;
+    max-width: 1000px;
     margin: 20px auto;
     padding: 20px;
     background-color: #1e1e1e;  /* Dark container background */
@@ -21,6 +22,7 @@ body {
 }
 
 /* Header Section */
+
 .header {
     display: flex;
     align-items: center;
@@ -35,16 +37,8 @@ body {
     background-color: #d1d8e0;
     border-radius: 50%;
     margin-right: 20px;
-    overflow: hidden;
 }
 
-/* Bild innerhalb des Containers */
-.profile-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 50%;
-}
 /* Header Info */
 .profile-info h1 {
     font-size: 2em;
@@ -91,11 +85,16 @@ h2 {
 
 .timeline-item .dot {
     position: absolute;
-    left: -5px;
+    left: -5.9px;
     width: 10px;
     height: 10px;
     background-color: #4a90e2;
     border-radius: 50%;
+}
+
+.description {
+    font-size: 1em;
+    color: #b0b0b0;  /* Light grey text */
 }
 
 /* Skills Pool */
@@ -110,30 +109,69 @@ h2 {
     padding: 8px 12px;
     border-radius: 12px;
     font-size: 0.9em;
-    color: #80cbc4;  /* Light teal color */
+    color: #4a90e2;  /* Light teal color */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Language Bars */
+.skills-pool span:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* Sprachkenntnis-Container */
 .language-bar p {
     display: flex;
     align-items: center;
     font-size: 1em;
-    color: #b0b0b0;  /* Light grey for language text */
+    color: #b0b0b0;
     margin-bottom: 5px;
 }
 
+/* Einheitliche Breite für Sprachennamen */
+.language-name {
+    width: 100px; /* Die Breite anpassen, um genug Platz für die längsten Sprachennamen zu haben */
+    margin-right: 10px;
+    text-align: right;
+}
+
+/* Grundstruktur des Balkens */
 .language-bar .bar {
     flex-grow: 1;
     height: 8px;
-    margin-left: 10px;
     border-radius: 4px;
-    background-color: #444;  /* Darker background for language bars */
+    background-color: #b0b0b0;
+    position: relative;
 }
 
-.language-bar .bar.full { width: 100%; background-color: #4caf50; }
-.language-bar .bar.high { width: 80%; background-color: #8bc34a; }
-.language-bar .bar.medium { width: 60%; background-color: #cddc39; }
-.language-bar .bar.low { width: 40%; background-color: #ffc107; }
+/* Füllungen für verschiedene Sprachkenntnisse */
+.language-bar .fill {
+    display: block;
+    height: 100%;
+    border-radius: 4px;
+    position: absolute;
+    left: 0;
+}
+
+.language-bar .fill.full {
+    width: 100%;
+    background-color: #4a90e2;
+}
+
+.language-bar .fill.high {
+    width: 80%;
+    background-color: #4a90e2;
+}
+
+.language-bar .fill.medium {
+    width: 60%;
+    background-color: #4a90e2;
+}
+
+.language-bar .fill.low {
+    width: 40%;
+    background-color: #4a90e2;
+}
+
 
 /* Interests with Icons */
 .interests ul {
@@ -158,4 +196,92 @@ h2 {
 .traits {
     font-size: 1em;
     color: #b0b0b0;
+}
+
+a {
+    color: #4a90e2;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+
+/* Menu styles */
+.hamburger-icon {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 40px;
+    height: 40px;
+    background-color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 1000;
+  }
+  
+  .hamburger-icon span {
+    width: 20px;
+    height: 2px;
+    background-color: #fff;
+    margin-bottom: 5px;
+    transition: transform 0.3s ease;
+  }
+  
+  .hamburger-icon span:last-child {
+    margin-bottom: 0;
+  }
+  
+ .menu {
+    margin: 10px;
+     position: fixed;
+     top: 60px;
+     left: 0;
+     width: 210px;
+     height: 10 px;
+     background-color: #333;
+     padding: 20px;
+     opacity: 0;
+     transform: translateX(-100%);
+     transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s linear 0.3s;
+     visibility: hidden;
+     border-radius: 5px;
+ }
+  
+  .menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    
+  }
+  
+  .menu li {
+    margin-bottom: 20px;
+    line-height: 4;
+  }
+  
+  .menu a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .menu a:hover {
+    color: #4a90e2;
+  }
+
+.show-menu {
+    opacity: 1;
+    transform: translateX(0);
+    visibility: visible;
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s linear 0s;
+}
+
+.ani a:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
