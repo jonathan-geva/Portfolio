@@ -195,7 +195,13 @@ const translations = {
         helpful: "Hilfsbereit",
         independent: "Selbstständig",
         flexible: "Flexibel",
-        current: "Aktuell"
+        current: "Aktuell",
+        projects: "Projekte",
+        projectTitle: "Projekt Titel",
+        projectDescription: "Projektbeschreibung folgt...",
+        portfolioTitle: "Portfolio Website",
+        portfolioDescription: "Eine moderne, responsive Portfolio-Website mit Hell/Dunkel-Modus, Sprachumschaltung und interaktiven 3D-Effekten. Entwickelt mit reinem HTML, CSS und JavaScript.",
+        menuProjects: "Projekte"
     },
     en: {
         aboutMe: "About me",
@@ -237,7 +243,13 @@ const translations = {
         helpful: "Helpful",
         independent: "Independent",
         flexible: "Flexible",
-        current: "Current"
+        current: "Current",
+        projects: "Projects",
+        projectTitle: "Project Title",
+        projectDescription: "Project description goes here...",
+        portfolioTitle: "Portfolio Website",
+        portfolioDescription: "A modern, responsive portfolio website with dark/light mode, language switching, and interactive 3D effects. Built with pure HTML, CSS, and JavaScript.",
+        menuProjects: "Projects"
     }
 };
 
@@ -332,6 +344,32 @@ function updateContent(lang) {
 
     // Fix the skills section title translation
     document.querySelector('.skills h2').textContent = translations[lang].skills;
+
+    // Update projects section
+    document.querySelector('#projects h2').textContent = translations[lang].projects;
+    const projectTitles = document.querySelectorAll('.project-info h3');
+    const projectDescs = document.querySelectorAll('.project-info p');
+    
+    projectTitles.forEach(title => {
+        title.textContent = translations[lang].projectTitle;
+    });
+    
+    projectDescs.forEach(desc => {
+        desc.textContent = translations[lang].projectDescription;
+    });
+
+    // Update portfolio project
+    const projectTitle = document.querySelector('.project-info h3');
+    const projectDesc = document.querySelector('.project-info p');
+    
+    if (projectTitle && projectDesc) {
+        projectTitle.textContent = translations[lang].portfolioTitle;
+        projectDesc.textContent = translations[lang].portfolioDescription;
+    }
+
+    // Update menu items
+    const menuLinks = document.querySelectorAll('.menu-item a');
+    menuLinks[7].textContent = translations[lang].menuProjects;
 }
 
 // Initialize with saved language
@@ -349,4 +387,165 @@ languageToggle.addEventListener('click', () => {
     setTimeout(() => {
         icon.style.transform = 'scale(1)';
     }, 200);
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Set delays for each section
+    const sections = document.querySelectorAll('section');
+    sections.forEach((section, index) => {
+        section.style.setProperty('--delay', index + 2);
+    });
+});
+
+// Add cursor gradient effect
+document.addEventListener('mousemove', (e) => {
+    const x = e.clientX;
+    const y = e.clientY;
+    
+    requestAnimationFrame(() => {
+        document.documentElement.style.setProperty('--mouse-x', `${x}px`);
+        document.documentElement.style.setProperty('--mouse-y', `${y}px`);
+    });
+});
+
+// Update the Intersection Observer code
+const observerOptions = {
+    threshold: 0.1,  // Reduced threshold to trigger earlier
+    rootMargin: '50px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            // Add visible class for fade in
+            setTimeout(() => {
+                entry.target.classList.add('visible');
+            }, 100); // Small delay to ensure transition works
+            
+            // Animate language bars if they exist
+            const bars = entry.target.querySelectorAll('.fill');
+            if (bars.length > 0) {
+                setTimeout(() => {
+                    bars.forEach((bar, index) => {
+                        setTimeout(() => {
+                            bar.classList.add('animate');
+                        }, index * 200);
+                    });
+                }, 400);
+            }
+            
+            observer.unobserve(entry.target);
+        }
+    });
+}, observerOptions);
+
+// Initialize sections when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    const sections = document.querySelectorAll('section');
+    sections.forEach(section => {
+        // Make sure sections start invisible
+        section.classList.remove('visible');
+        // Start observing each section
+        observer.observe(section);
+    });
+});
+
+// Add scroll progress functionality
+const addScrollProgress = () => {
+    const progressBar = document.querySelector('.scroll-progress');
+    
+    window.addEventListener('scroll', () => {
+        const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+        progressBar.style.width = `${scrollPercent}%`;
+    });
+};
+
+// Replace the existing parallax effect with this optimized version
+const addParallaxEffect = () => {
+    const sections = document.querySelectorAll('section');
+    let lastTime = 0;
+    const THROTTLE_AMOUNT = 10; // ms between updates
+
+    // Smooth interpolation function
+    const lerp = (start, end, factor) => {
+        return start + (end - start) * factor;
+    };
+
+    // Store current rotations for each section
+    const sectionRotations = new Map();
+    sections.forEach(section => {
+        sectionRotations.set(section, { x: 0, y: 0 });
+    });
+
+    document.addEventListener('mousemove', (e) => {
+        const currentTime = Date.now();
+        if (currentTime - lastTime < THROTTLE_AMOUNT) return;
+        lastTime = currentTime;
+
+        requestAnimationFrame(() => {
+            sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                
+                // Check if mouse is over this section and section is in view
+                if (e.clientY >= rect.top && 
+                    e.clientY <= rect.bottom && 
+                    rect.top < window.innerHeight && 
+                    rect.bottom > 0) {
+                    
+                    // Calculate rotation based on mouse position relative to section center
+                    const sectionCenterX = rect.left + rect.width / 2;
+                    const sectionCenterY = rect.top + rect.height / 2;
+                    
+                    const mouseXFromCenter = (e.clientX - sectionCenterX) / (rect.width / 2);
+                    const mouseYFromCenter = (e.clientY - sectionCenterY) / (rect.height / 2);
+                    
+                    // Target rotations
+                    const targetX = -mouseYFromCenter * 2; // Reduced rotation amount
+                    const targetY = mouseXFromCenter * 2;  // Reduced rotation amount
+                    
+                    // Get current rotations
+                    const current = sectionRotations.get(section);
+                    
+                    // Smoothly interpolate to new rotations
+                    const newX = lerp(current.x, targetX, 0.1);
+                    const newY = lerp(current.y, targetY, 0.1);
+                    
+                    // Update stored rotations
+                    sectionRotations.set(section, { x: newX, y: newY });
+                    
+                    // Apply transform with easing
+                    section.style.transform = `
+                        perspective(1000px)
+                        rotateX(${newX}deg)
+                        rotateY(${newY}deg)
+                        translateZ(10px)
+                    `;
+                } else {
+                    // Smoothly return to neutral position
+                    const current = sectionRotations.get(section);
+                    const newX = lerp(current.x, 0, 0.1);
+                    const newY = lerp(current.y, 0, 0.1);
+                    
+                    if (Math.abs(newX) < 0.01 && Math.abs(newY) < 0.01) {
+                        section.style.transform = 'none';
+                        sectionRotations.set(section, { x: 0, y: 0 });
+                    } else {
+                        sectionRotations.set(section, { x: newX, y: newY });
+                        section.style.transform = `
+                            perspective(1000px)
+                            rotateX(${newX}deg)
+                            rotateY(${newY}deg)
+                            translateZ(10px)
+                        `;
+                    }
+                }
+            });
+        });
+    });
+};
+
+// Initialize new features
+document.addEventListener('DOMContentLoaded', () => {
+    addScrollProgress();
+    addParallaxEffect();
 });

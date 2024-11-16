@@ -22,6 +22,8 @@ body {
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3),
                 0 0 20px rgba(74, 144, 226, 0.1);  /* Added blue glow */
     border: 1px solid rgba(74, 144, 226, 0.1);  /* Subtle blue border */
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards;
 }
 
 /* Header Section */
@@ -43,6 +45,9 @@ svg {
     align-items: center;
     padding-bottom: 20px;
     border-bottom: 2px solid rgba(74, 144, 226, 0.2);  /* Glowing border */
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards;
+    animation-delay: 0.2s;
 }
 
 /* Header Section */
@@ -55,6 +60,10 @@ svg {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     border: 2px solid rgba(74, 144, 226, 0.2);
     cursor: pointer;
+    object-fit: cover;
+    background-color: #1a1a1a;
+    display: block;
+    position: relative;
 }
 
 .profile-image:hover {
@@ -78,18 +87,55 @@ svg {
 section {
     margin-top: 20px;
     padding: 20px;
-    background-color: #1a1a1a;  /* Slightly lighter than container */
+    background-color: #1a1a1a;
     border-radius: 16px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     border: 1px solid rgba(74, 144, 226, 0.1);
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.2s ease;
+    transform-style: preserve-3d;
+    transform: none;
 }
 
+section.visible {
+    opacity: 1;
+}
+
+/* Remove any transform from hover effect */
 section:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3),
-                0 0 20px rgba(74, 144, 226, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3),
+                0 0 25px rgba(74, 144, 226, 0.2),
+                inset 0 0 32px rgba(74, 144, 226, 0.05);
     border: 1px solid rgba(74, 144, 226, 0.2);
+}
+
+/* Add visible class styles */
+section.visible {
+    opacity: 1;
+}
+
+/* Remove the fadeInUp animation from sections */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Keep animation only for container and header */
+.container {
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+.header {
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards;
+    animation-delay: 0.2s;
 }
 
 h2 {
@@ -143,15 +189,30 @@ a {
     border-radius: 12px;
     font-size: 0.9em;
     color: #4a90e2;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     border: 1px solid rgba(74, 144, 226, 0.1);
+    transition: all 0.15s ease;
+    position: static;  /* Remove relative positioning */
+    transform: none !important;  /* Remove any transforms */
+    backface-visibility: visible;  /* Remove 3D effects */
+    transform-style: flat;  /* Remove 3D effects */
 }
 
 .skills-pool span:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(74, 144, 226, 0.2);
     background-color: #2a2a2a;
+    color: #ffffff;
+    margin-top: -3px;  /* Use margin instead of transform */
+    margin-bottom: 3px;  /* Balance the margin-top */
+    box-shadow: 0 5px 15px rgba(74, 144, 226, 0.2);
     border-color: rgba(74, 144, 226, 0.3);
+}
+
+/* Light mode styles */
+body.light-mode .skills-pool span {
+    background-color: #e9ecef;
+}
+
+body.light-mode .skills-pool span:hover {
+    background-color: #d8e0e7;
 }
 
 /* Sprachkenntnis-Container */
@@ -170,47 +231,68 @@ a {
     text-align: right;
 }
 
-/* Grundstruktur des Balkens */
+/* Update language bar styles with reduced glow */
 .language-bar .bar {
     flex-grow: 1;
     height: 10px;
     border-radius: 4px;
+    overflow: visible;
     background-color: #232323;
-    position: relative;
     border: 1px solid rgba(74, 144, 226, 0.1);
+    position: relative;
+    margin: 4px 0;  /* Slightly reduced margin */
 }
 
-/* Füllungen für verschiedene Sprachkenntnisse */
 .language-bar .fill {
-    display: block;
+    position: absolute;
     height: 100%;
     border-radius: 4px;
-    position: absolute;
-    left: 0;
     background: linear-gradient(90deg, #4a90e2, #357abd);
-    box-shadow: 0 0 10px rgba(74, 144, 226, 0.3);
+    filter: drop-shadow(0 0 5px rgba(74, 144, 226, 0.25));  /* Reduced glow */
+    box-shadow: 0 0 8px rgba(74, 144, 226, 0.25),
+                inset 0 0 6px rgba(74, 144, 226, 0.1);  /* Reduced glow */
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.language-bar .fill:hover {
+    box-shadow: 0 0 20px rgba(74, 144, 226, 0.6);  /* Enhanced glow on hover */
+}
+
+/* Animation class */
+.language-bar .fill.animate {
+    transform: scaleX(1);
+}
+
+/* Enhanced glow for different levels (reduced intensity) */
 .language-bar .fill.full {
     width: 100%;
-    background-color: #4a90e2;
+    filter: drop-shadow(0 0 6px rgba(74, 144, 226, 0.3));
+    box-shadow: 0 0 10px rgba(74, 144, 226, 0.3),
+                inset 0 0 8px rgba(74, 144, 226, 0.15);
 }
 
 .language-bar .fill.high {
     width: 80%;
-    background-color: #4a90e2;
+    filter: drop-shadow(0 0 5px rgba(74, 144, 226, 0.25));
+    box-shadow: 0 0 8px rgba(74, 144, 226, 0.25),
+                inset 0 0 6px rgba(74, 144, 226, 0.12);
 }
 
 .language-bar .fill.medium {
     width: 60%;
-    background-color: #4a90e2;
+    filter: drop-shadow(0 0 4px rgba(74, 144, 226, 0.2));
+    box-shadow: 0 0 6px rgba(74, 144, 226, 0.2),
+                inset 0 0 4px rgba(74, 144, 226, 0.1);
 }
 
 .language-bar .fill.low {
     width: 40%;
-    background-color: #4a90e2;
+    filter: drop-shadow(0 0 3px rgba(74, 144, 226, 0.15));
+    box-shadow: 0 0 4px rgba(74, 144, 226, 0.15),
+                inset 0 0 3px rgba(74, 144, 226, 0.08);
 }
-
 
 /* Interests with Icons */
 .interests ul {
@@ -705,4 +787,355 @@ body.light-mode .language-toggle {
     background-color: rgba(74, 144, 226, 0.1);
     text-shadow: 0 0 10px rgba(74, 144, 226, 0.3);
     transform: translateX(5px);
+}
+
+/* Add these animation styles to your existing CSS */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.container {
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+.header {
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards;
+    animation-delay: 0.2s;
+}
+
+/* Add gradient background that follows cursor */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+        800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+        rgba(74, 144, 226, 0.07),
+        transparent 40%
+    );
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Glass morphism for buttons and menu */
+.hamburger-icon,
+.theme-toggle,
+.language-toggle {
+    background: rgba(26, 26, 26, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(74, 144, 226, 0.1);
+}
+
+.menu {
+    background: rgba(26, 26, 26, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+/* Improved shadows and glows */
+.container {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3),
+                0 0 20px rgba(74, 144, 226, 0.1),
+                inset 0 0 32px rgba(74, 144, 226, 0.05);
+}
+
+section:hover {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3),
+                0 0 25px rgba(74, 144, 226, 0.2),
+                inset 0 0 32px rgba(74, 144, 226, 0.05);
+}
+
+/* Update scroll animation threshold */
+section {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Update scroll progress indicator with enhanced glow */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background: linear-gradient(90deg, #4a90e2, #357abd);
+    z-index: 1000;
+    transition: width 0.1s ease;
+    box-shadow: 0 0 10px rgba(74, 144, 226, 0.5),
+                0 0 20px rgba(74, 144, 226, 0.3),
+                0 0 30px rgba(74, 144, 226, 0.2),
+                inset 0 0 15px rgba(74, 144, 226, 0.3);
+    border-radius: 0 3px 3px 0;
+}
+
+/* Add glow effect for light mode */
+body.light-mode .scroll-progress {
+    box-shadow: 0 0 10px rgba(74, 144, 226, 0.6),
+                0 0 20px rgba(74, 144, 226, 0.4),
+                0 0 30px rgba(74, 144, 226, 0.3),
+                inset 0 0 15px rgba(74, 144, 226, 0.4);
+}
+
+/* Add hover card effect to skills */
+.skills-pool span {
+    transform: translateZ(0);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.skills-pool span:hover {
+    transform: translateY(-5px) scale(1.05);
+}
+
+.skills-pool span::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(74, 144, 226, 0.2),
+        transparent
+    );
+    transition: 0.5s;
+}
+
+.skills-pool span:hover::before {
+    left: 100%;
+}
+
+/* Add subtle parallax effect to sections */
+section {
+    transform-style: preserve-3d;
+    perspective: 1500px;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Add depth to different elements */
+.skills-pool span {
+    transform: translateZ(20px);
+    transform-style: preserve-3d;
+}
+
+.profile-image {
+    transform: translateZ(30px);
+    transform-style: preserve-3d;
+}
+
+.timeline {
+    transform: translateZ(15px);
+    transform-style: preserve-3d;
+}
+
+.language-bar {
+    transform: translateZ(25px);
+    transform-style: preserve-3d;
+}
+
+section:hover {
+    transform: translateY(-5px) translateZ(20px);
+}
+
+/* Add to your light mode styles */
+body.light-mode .project-card {
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(74, 144, 226, 0.1);
+}
+
+body.light-mode .project-info h3 {
+    color: #333;
+}
+
+body.light-mode .project-info p {
+    color: #666;
+}
+
+body.light-mode .project-tags span {
+    background: rgba(74, 144, 226, 0.1);
+    color: #4a90e2;
+}
+
+/* Project Section Styles */
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin-top: 20px;
+}
+
+.project-card {
+    background: rgba(26, 26, 26, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(74, 144, 226, 0.1);
+    transform-style: preserve-3d;
+    transform: translateZ(0);
+}
+
+.project-card:hover {
+    transform: translateY(-10px) translateZ(20px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3),
+                0 0 30px rgba(74, 144, 226, 0.2);
+    border-color: rgba(74, 144, 226, 0.3);
+}
+
+.project-image {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+}
+
+.project-image::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(26, 26, 26, 0.8) 100%
+    );
+}
+
+.project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.project-card:hover .project-image img {
+    transform: scale(1.1);
+}
+
+.project-info {
+    padding: 25px;
+    position: relative;
+}
+
+.project-info h3 {
+    color: #fff;
+    font-size: 1.4em;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.project-info h3::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 50px;
+    height: 2px;
+    background: linear-gradient(90deg, #4a90e2, transparent);
+}
+
+.project-info p {
+    color: #b0b0b0;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.project-tags span {
+    background: rgba(74, 144, 226, 0.1);
+    color: #4a90e2;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    transition: all 0.3s;
+    border: 1px solid rgba(74, 144, 226, 0.2);
+}
+
+.project-tags span:hover {
+    background: rgba(74, 144, 226, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(74, 144, 226, 0.2);
+}
+
+/* Light mode styles for projects */
+body.light-mode .project-card {
+    background: rgba(255, 255, 255, 0.9);
+}
+
+body.light-mode .project-info h3 {
+    color: #333;
+}
+
+body.light-mode .project-info p {
+    color: #666;
+}
+
+body.light-mode .project-tags span {
+    background: rgba(74, 144, 226, 0.1);
+    color: #4a90e2;
+}
+
+/* Add hover effect for project links */
+.project-link {
+    position: absolute;
+    right: 25px;
+    bottom: 25px;
+    color: #4a90e2;
+    font-size: 1.2em;
+    opacity: 0;
+    transform: translateX(20px);
+    transition: all 0.3s;
+}
+
+.project-card:hover .project-link {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Add project count */
+.projects h2 {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.projects h2::after {
+    content: attr(data-count);
+    font-size: 0.6em;
+    background: rgba(74, 144, 226, 0.1);
+    padding: 5px 10px;
+    border-radius: 20px;
+    color: #4a90e2;
 }
