@@ -460,92 +460,22 @@ const addScrollProgress = () => {
     });
 };
 
-// Replace the existing parallax effect with this optimized version
-const addParallaxEffect = () => {
-    const sections = document.querySelectorAll('section');
-    let lastTime = 0;
-    const THROTTLE_AMOUNT = 10; // ms between updates
-
-    // Smooth interpolation function
-    const lerp = (start, end, factor) => {
-        return start + (end - start) * factor;
-    };
-
-    // Store current rotations for each section
-    const sectionRotations = new Map();
-    sections.forEach(section => {
-        sectionRotations.set(section, { x: 0, y: 0 });
+// Replace the existing parallax effect with Tilt.js
+document.addEventListener('DOMContentLoaded', () => {
+    $('section').tilt({
+        maxTilt: 5,
+        perspective: 1500,   // Higher perspective for subtler effect
+        scale: 1.02,
+        speed: 1000,
+        glare: true,
+        maxGlare: 0.1,
+        reset: true,
+        reverse: true,      // This inverts the tilt effect
+        easing: "cubic-bezier(.03,.98,.52,.99)"
     });
-
-    document.addEventListener('mousemove', (e) => {
-        const currentTime = Date.now();
-        if (currentTime - lastTime < THROTTLE_AMOUNT) return;
-        lastTime = currentTime;
-
-        requestAnimationFrame(() => {
-            sections.forEach(section => {
-                const rect = section.getBoundingClientRect();
-                
-                // Check if mouse is over this section and section is in view
-                if (e.clientY >= rect.top && 
-                    e.clientY <= rect.bottom && 
-                    rect.top < window.innerHeight && 
-                    rect.bottom > 0) {
-                    
-                    // Calculate rotation based on mouse position relative to section center
-                    const sectionCenterX = rect.left + rect.width / 2;
-                    const sectionCenterY = rect.top + rect.height / 2;
-                    
-                    const mouseXFromCenter = (e.clientX - sectionCenterX) / (rect.width / 2);
-                    const mouseYFromCenter = (e.clientY - sectionCenterY) / (rect.height / 2);
-                    
-                    // Target rotations
-                    const targetX = -mouseYFromCenter * 2; // Reduced rotation amount
-                    const targetY = mouseXFromCenter * 2;  // Reduced rotation amount
-                    
-                    // Get current rotations
-                    const current = sectionRotations.get(section);
-                    
-                    // Smoothly interpolate to new rotations
-                    const newX = lerp(current.x, targetX, 0.1);
-                    const newY = lerp(current.y, targetY, 0.1);
-                    
-                    // Update stored rotations
-                    sectionRotations.set(section, { x: newX, y: newY });
-                    
-                    // Apply transform with easing
-                    section.style.transform = `
-                        perspective(1000px)
-                        rotateX(${newX}deg)
-                        rotateY(${newY}deg)
-                        translateZ(10px)
-                    `;
-                } else {
-                    // Smoothly return to neutral position
-                    const current = sectionRotations.get(section);
-                    const newX = lerp(current.x, 0, 0.1);
-                    const newY = lerp(current.y, 0, 0.1);
-                    
-                    if (Math.abs(newX) < 0.01 && Math.abs(newY) < 0.01) {
-                        section.style.transform = 'none';
-                        sectionRotations.set(section, { x: 0, y: 0 });
-                    } else {
-                        sectionRotations.set(section, { x: newX, y: newY });
-                        section.style.transform = `
-                            perspective(1000px)
-                            rotateX(${newX}deg)
-                            rotateY(${newY}deg)
-                            translateZ(10px)
-                        `;
-                    }
-                }
-            });
-        });
-    });
-};
+});
 
 // Initialize new features
 document.addEventListener('DOMContentLoaded', () => {
     addScrollProgress();
-    addParallaxEffect();
 });
