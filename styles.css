@@ -14,8 +14,8 @@ body {
 }
 
 .container {
-    max-width: 1000px;
-    margin: 20px auto;
+    max-width: 1200px;
+    margin: 0 auto;
     padding: 20px;
     background-color: #141414;  /* Darker container */
     border-radius: 16px;
@@ -87,13 +87,13 @@ svg {
 section {
     margin-top: 20px;
     padding: 20px;
-    background-color: #1a1a1a;
+    background-color: transparent;
     border-radius: 16px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: none;
     border: 1px solid rgba(74, 144, 226, 0.1);
-    opacity: 0;
+    opacity: 1;
     transform-style: preserve-3d;
-    transition: opacity 0.3s ease;
+    transition: all 0.3s ease;
     overflow: hidden;
 }
 
@@ -103,6 +103,7 @@ section.visible {
 
 /* Remove any existing transform or transition properties that might conflict */
 section:hover {
+    background-color: rgba(26, 26, 26, 0.95);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3),
                 0 0 25px rgba(74, 144, 226, 0.2),
                 inset 0 0 32px rgba(74, 144, 226, 0.05);
@@ -413,12 +414,14 @@ body.light-mode .skills-pool span:hover {
 /* Update the scroll-to-top button styles */
 #scrollToTopBtn {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    bottom: 30px;
+    right: 30px;
     width: 45px;
     height: 45px;
-    background: #1a1a1a;  /* Dark background */
-    color: #4a90e2;  /* Blue color for the arrow */
+    background: rgba(26, 26, 26, 0.9);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: #4a90e2;
     border: 1px solid rgba(74, 144, 226, 0.1);
     border-radius: 50%;
     font-size: 24px;
@@ -427,23 +430,23 @@ body.light-mode .skills-pool span:hover {
     align-items: center;
     justify-content: center;
     opacity: 0;
+    visibility: hidden;
     transform: translateY(20px);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 0 20px rgba(74, 144, 226, 0.2);
-    pointer-events: none;
-}
-
-#scrollToTopBtn:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0 25px rgba(74, 144, 226, 0.4);
-    border-color: rgba(74, 144, 226, 0.3);
-    background: #232323;  /* Slightly lighter dark on hover */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
 }
 
 #scrollToTopBtn.visible {
     opacity: 1;
+    visibility: visible;
     transform: translateY(0);
-    pointer-events: auto;
+}
+
+#scrollToTopBtn:hover {
+    background: rgba(74, 144, 226, 0.1);
+    transform: translateY(-5px);
+    box-shadow: 0 6px 25px rgba(74, 144, 226, 0.3);
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
@@ -647,31 +650,41 @@ html {
 
 /* Light theme styles */
 body.light-mode {
-    background-color: #f0f2f5;
+    background-color: #f5f5f5;
     color: #333;
 }
 
 body.light-mode .container {
     background-color: #ffffff;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1),
-                0 0 20px rgba(74, 144, 226, 0.05);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
 }
 
 body.light-mode section {
-    background-color: #f8f9fa;
+    background-color: transparent;
+}
+
+body.light-mode section:hover {
+    background-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1),
+                0 0 25px rgba(74, 144, 226, 0.1);
+}
+
+body.light-mode .top-menu {
+    background: rgba(255, 255, 255, 0.85);
     border: 1px solid rgba(74, 144, 226, 0.1);
 }
 
-body.light-mode .skills-pool span {
-    background-color: #e9ecef;
-    color: #4a90e2;
+body.light-mode .menu-item a {
+    color: #333;
 }
 
-body.light-mode .menu,
-body.light-mode .hamburger-icon,
-body.light-mode .theme-toggle,
-body.light-mode #scrollToTopBtn {
-    background-color: #f8f9fa;
+body.light-mode .dropdown-content {
+    background: rgba(255, 255, 255, 0.95);
+}
+
+body.light-mode .theme-toggle i,
+body.light-mode .language-toggle i {
+    color: #333;
 }
 
 body.light-mode .profile-info h1 {
@@ -682,22 +695,33 @@ body.light-mode .profile-info p {
     color: #666;
 }
 
-body.light-mode h2 {
-    color: #333;
-}
-
-body.light-mode .interests li,
-body.light-mode .description,
-body.light-mode .language-bar p {
+body.light-mode .timeline-item .description {
     color: #666;
 }
 
-body.light-mode .language-bar .bar {
-    background-color: #e9ecef;
+body.light-mode .skills-pool span {
+    background: rgba(74, 144, 226, 0.1);
+    color: #4a90e2;
 }
 
-body.light-mode .menu a {
+body.light-mode .language-bar .bar {
+    background: rgba(74, 144, 226, 0.1);
+}
+
+body.light-mode .form-group input,
+body.light-mode .form-group textarea {
+    background: #ffffff;
+    border: 1px solid rgba(74, 144, 226, 0.2);
     color: #333;
+}
+
+body.light-mode .form-group label {
+    color: #666;
+}
+
+body.light-mode .submit-btn {
+    background: #4a90e2;
+    color: #ffffff;
 }
 
 /* Add the language toggle button styles */
@@ -1134,4 +1158,422 @@ body.light-mode .project-tags span {
     padding: 5px 10px;
     border-radius: 20px;
     color: #4a90e2;
+}
+
+/* Top Menu Bar */
+.top-menu {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: auto;
+  min-width: 500px;
+  background: rgba(26, 26, 26, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  border-radius: 50px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(74, 144, 226, 0.1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.top-menu.hidden {
+  transform: translate(-50%, -100px);
+  opacity: 0;
+}
+
+/* Menu container styles */
+.menu-container {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.menu-item {
+  position: relative;
+  padding: 5px 0;
+}
+
+.menu-item a {
+  color: #e0e0e0;
+  text-decoration: none;
+  font-size: 16px;
+  padding: 8px 20px;
+  border-radius: 25px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  display: inline-block;
+}
+
+.menu-item a:hover {
+  color: #4a90e2;
+  background: rgba(74, 144, 226, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Active state for current page/section */
+.menu-item.active a {
+  color: #4a90e2;
+  background: rgba(74, 144, 226, 0.15);
+  box-shadow: 0 0 20px rgba(74, 144, 226, 0.1);
+}
+
+/* Improved dropdown styles */
+.dropdown-content {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, 15px);
+    background: rgba(26, 26, 26, 0.9);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    min-width: 220px;
+    padding: 15px 0;
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(74, 144, 226, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.dropdown:hover .dropdown-content {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, 10px);
+}
+
+/* Dropdown items styling with more padding */
+.dropdown-content a {
+    color: #e0e0e0;
+    padding: 12px 25px;
+    text-decoration: none;
+    display: block;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    background: none !important;
+    margin: 2px 0;
+}
+
+.dropdown-content a:hover {
+    color: #4a90e2;
+    transform: translateX(5px);
+    background: none !important;
+}
+
+/* Light mode - still no backgrounds */
+body.light-mode .dropdown-content a {
+    color: #333;
+    background: none !important;
+}
+
+body.light-mode .dropdown-content a:hover {
+    color: #4a90e2;
+    background: none !important;
+}
+
+/* Remove any active state backgrounds */
+.dropdown-content a.active {
+    background: none !important;
+}
+
+.dropdown-content a.active::before {
+    display: none; /* Remove the blue line indicator */
+}
+
+/* Control buttons styling */
+.menu-controls {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.theme-toggle,
+.language-toggle {
+  background: none;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 25px;
+  cursor: pointer;
+  color: #e0e0e0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.theme-toggle:hover,
+.language-toggle:hover {
+  background: rgba(74, 144, 226, 0.1);
+  transform: translateY(-2px);
+}
+
+.theme-toggle i,
+.language-toggle i {
+  font-size: 16px;
+  color: #e0e0e0;
+}
+
+/* Active section indicator */
+.dropdown-content a.active {
+  color: #4a90e2;
+  background: rgba(74, 144, 226, 0.1);
+  position: relative;
+}
+
+.dropdown-content a.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 3px;
+  background: #4a90e2;
+  border-radius: 0 2px 2px 0;
+}
+
+/* Fix section visibility */
+section {
+  opacity: 1 !important;
+  visibility: visible !important;
+  margin-bottom: 30px;
+}
+
+/* Adjust container margin for fixed menu */
+.container {
+  margin-top: 100px;
+  margin-bottom: 50px;
+}
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
+}
+
+/* Page styles */
+.page {
+  display: none;
+  padding-top: 80px; /* Space for the menu */
+  min-height: 100vh;
+}
+
+.page.active {
+  display: block;
+}
+
+/* Contact form styles */
+.contact-form {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(74, 144, 226, 0.1);
+  border-radius: 8px;
+  color: #e0e0e0;
+}
+
+.form-group label {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  color: #888;
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus + label,
+.form-group textarea:focus + label,
+.form-group input:valid + label,
+.form-group textarea:valid + label {
+  transform: translateY(-25px);
+  font-size: 0.8em;
+  color: #4a90e2;
+}
+
+/* Update section title styles */
+section h2 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    color: #ffffff;
+    position: relative;
+    display: inline-block;
+}
+
+/* Light mode section title styles */
+body.light-mode section h2 {
+    color: #333;
+}
+
+/* Make sure section titles are visible */
+body.light-mode section {
+    background-color: #ffffff;
+    border: 1px solid rgba(74, 144, 226, 0.1);
+}
+
+body.light-mode section h2::after {
+    background: linear-gradient(90deg, #4a90e2, transparent);
+}
+
+/* Fix page visibility */
+.page {
+    display: none;
+    padding-top: 80px;
+    min-height: 100vh;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.page[style*="display: block"] {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* Menu item base styles */
+.menu-item a,
+.menu-item span#themeToggle,
+.menu-item span#languageToggle {
+    color: #e0e0e0;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 8px 20px;
+    border-radius: 25px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+/* Hover effects */
+.menu-item a:hover,
+.menu-item span#themeToggle:hover {
+    color: #4a90e2;
+    background: rgba(74, 144, 226, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Special hover for language toggle - no background */
+.menu-item span#languageToggle:hover {
+    color: #4a90e2;
+    transform: translateY(-2px);
+}
+
+/* Light mode styles */
+body.light-mode .menu-item a,
+body.light-mode .menu-item span#themeToggle,
+body.light-mode .menu-item span#languageToggle {
+    color: #333;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+    .menu-item a,
+    .menu-item span#themeToggle,
+    .menu-item span#languageToggle {
+        font-size: 14px;
+        padding: 6px 12px;
+    }
+}
+
+/* Menu item hover effects */
+.menu-item a:hover,
+.menu-item span#themeToggle:hover,
+.menu-item span#languageToggle:hover {  /* Add languageToggle here */
+    color: #4a90e2;
+    background: rgba(74, 144, 226, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Remove the special hover for language toggle */
+/* Delete or comment out these styles:
+.menu-item span#languageToggle:hover {
+    color: #4a90e2;
+    transform: translateY(-2px);
+}
+*/
+
+/* Personal interests styling */
+#personal ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#personal li {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    color: #b0b0b0;
+    font-size: 1em;
+}
+
+#personal li i {
+    color: #4a90e2;
+    font-size: 1.2em;
+    width: 20px;
+    text-align: center;
+}
+
+/* Light mode adjustments */
+body.light-mode #personal li {
+    color: #666;
+}
+
+body.light-mode #personal li i {
+    color: #4a90e2;
+}
+
+/* Contact form submit button */
+.contact-form button[type="submit"] {
+    background: rgba(74, 144, 226, 0.1);
+    color: #4a90e2;
+    border: 1px solid rgba(74, 144, 226, 0.2);
+    padding: 12px 30px;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: block;
+    margin: 30px auto 0;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.contact-form button[type="submit"]:hover {
+    background: rgba(74, 144, 226, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(74, 144, 226, 0.2);
+}
+
+/* Light mode adjustments */
+body.light-mode #scrollToTopBtn {
+    background: rgba(255, 255, 255, 0.9);
+}
+
+body.light-mode .contact-form button[type="submit"] {
+    background: rgba(74, 144, 226, 0.1);
+    color: #4a90e2;
+}
+
+body.light-mode .contact-form button[type="submit"]:hover {
+    background: rgba(74, 144, 226, 0.2);
 }
