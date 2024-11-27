@@ -190,6 +190,15 @@ document.addEventListener('DOMContentLoaded', () => {
             gaming: "Gaming",
             programming: "Programmieren",
             scrollDown: "Nach unten scrollen",
+            
+            // Game UI translations
+            effectStrength: "Effektstärke",
+            reset: "Zurücksetzen",
+            exit: "Beenden",
+            gameHints: "R zum Zurücksetzen • ESC zum Beenden",
+            grenade: "Granate",
+            attractor: "Magnetfeld",
+            repulsor: "Abstoßung"
         },
         en: {
             // Menu items
@@ -277,6 +286,15 @@ document.addEventListener('DOMContentLoaded', () => {
             gaming: "Gaming",
             programming: "Programming",
             scrollDown: "Scroll Down",
+            
+            // Game UI translations
+            effectStrength: "Effect Strength",
+            reset: "Reset",
+            exit: "Exit",
+            gameHints: "Press R to reset • ESC to exit",
+            grenade: "Grenade",
+            attractor: "Attractor",
+            repulsor: "Repulsor"
         }
     };
 
@@ -434,4 +452,152 @@ document.addEventListener('DOMContentLoaded', () => {
     const cursorGradient = document.createElement('div');
     cursorGradient.className = 'cursor-gradient';
     document.body.appendChild(cursorGradient);
+
+    // Add after DOMContentLoaded event handler
+    const gameToggle = document.getElementById('gameToggle');
+    const gameUI = document.getElementById('gameUI');
+    const inventorySlots = document.querySelectorAll('.inventory-slot');
+
+    function enterGameMode() {
+        document.body.classList.add('game-mode');
+        gameUI.classList.remove('hidden');
+        particleSystem.setGameMode(true);
+        // Reset item selection
+        inventorySlots.forEach(slot => slot.classList.remove('selected'));
+        document.body.removeAttribute('data-selected-item');
+        customCursor.querySelector('i').className = 'fas fa-crosshairs';
+        // Reset particles to initial state
+        particleSystem.resetParticles();
+        
+        // Reset strength slider to default
+        strengthSlider.value = 1;
+        sliderValue.textContent = '1.0x';
+        particleSystem.setEffectStrength(1);
+    }
+
+    function exitGameMode() {
+        document.body.classList.remove('game-mode');
+        gameUI.classList.add('hidden');
+        particleSystem.setGameMode(false);
+        document.body.removeAttribute('data-selected-item');
+        inventorySlots.forEach(slot => slot.classList.remove('selected'));
+        
+        // Reset cursor behavior
+        customCursor.style.display = 'none';
+        document.body.style.cursor = 'default';
+        
+        // Reset custom cursor icon
+        customCursor.querySelector('i').className = 'fas fa-crosshairs';
+    }
+
+    gameToggle.addEventListener('click', () => {
+        if (document.body.classList.contains('game-mode')) {
+            exitGameMode();
+        } else {
+            enterGameMode();
+        }
+    });
+
+    // Handle ESC key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && document.body.classList.contains('game-mode')) {
+            exitGameMode();
+        }
+    });
+
+    // Update the inventory slot click handler
+    inventorySlots.forEach(slot => {
+        slot.addEventListener('click', () => {
+            if (!document.body.classList.contains('game-mode')) return;
+            
+            inventorySlots.forEach(s => s.classList.remove('selected'));
+            slot.classList.add('selected');
+            document.body.setAttribute('data-selected-item', slot.dataset.item);
+            particleSystem.setSelectedItem(slot.dataset.item);
+            
+            // Update custom cursor icon
+            const cursorIcon = customCursor.querySelector('i');
+            switch (slot.dataset.item) {
+                case 'grenade':
+                    cursorIcon.className = 'fas fa-bomb';
+                    break;
+                case 'attractor':
+                    cursorIcon.className = 'fas fa-magnet';
+                    break;
+                case 'repulsor':
+                    cursorIcon.className = 'fas fa-expand-arrows-alt';
+                    break;
+                default:
+                    cursorIcon.className = 'fas fa-crosshairs';
+                    break;
+            }
+            
+            // Ensure cursor is visible and following mouse
+            customCursor.style.display = 'flex';
+            document.body.style.cursor = 'none';
+        });
+    });
+
+    // Add to your DOMContentLoaded event handler
+    const customCursor = document.querySelector('.custom-cursor');
+
+    // Update cursor position
+    document.addEventListener('mousemove', (e) => {
+        if (document.body.classList.contains('game-mode') && !particleSystem.isUIHovered) {
+            customCursor.style.display = 'flex';
+            customCursor.style.left = `${e.clientX}px`;
+            customCursor.style.top = `${e.clientY}px`;
+        }
+    });
+
+    // Add these after your existing game mode setup
+    const resetButton = document.getElementById('resetButton');
+    const escapeButton = document.getElementById('escapeButton');
+
+    // Reset button click handler
+    resetButton.addEventListener('click', () => {
+        particleSystem.resetParticles();
+    });
+
+    // Escape button click handler
+    escapeButton.addEventListener('click', () => {
+        exitGameMode();
+    });
+
+    // Update keyboard controls
+    document.addEventListener('keydown', (e) => {
+        if (document.body.classList.contains('game-mode')) {
+            if (e.key === 'Escape') {
+                exitGameMode();
+            } else if (e.key.toLowerCase() === 'r') {
+                particleSystem.resetParticles();
+            }
+        }
+    });
+
+    // Add hover handlers for the game UI
+    gameUI.addEventListener('mouseenter', () => {
+        particleSystem.setUIHovered(true);
+        customCursor.style.display = 'none';
+        document.body.style.cursor = 'default';
+    });
+
+    gameUI.addEventListener('mouseleave', () => {
+        particleSystem.setUIHovered(false);
+        if (document.body.classList.contains('game-mode')) {
+            customCursor.style.display = 'flex';
+            document.body.style.cursor = 'none';
+        }
+    });
+
+    // Add after your other game UI setup
+    const strengthSlider = document.getElementById('strengthSlider');
+    const sliderValue = document.querySelector('.slider-value');
+
+    // Update slider value display and particle system
+    strengthSlider.addEventListener('input', (e) => {
+        const value = parseFloat(e.target.value);
+        sliderValue.textContent = value.toFixed(1) + 'x';
+        particleSystem.setEffectStrength(value);
+    });
 });

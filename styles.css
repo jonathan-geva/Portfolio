@@ -1874,3 +1874,261 @@ canvas#particleCanvas {
     pointer-events: none;
     z-index: -1;
 }
+
+/* Game Mode Styles */
+.game-ui {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(26, 26, 26, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 20px;
+    border-radius: 20px;
+    border: 1px solid rgba(74, 144, 226, 0.3);
+    box-shadow: 0 0 30px rgba(74, 144, 226, 0.15);
+    z-index: 1000;
+    transition: all 0.3s ease;
+    user-select: none;
+    display: none; /* Hide by default */
+    opacity: 0;
+}
+
+/* Show game UI only in game mode */
+body.game-mode .game-ui {
+    display: block;
+    opacity: 1;
+}
+
+.game-controls {
+    display: flex;
+    align-items: flex-start;
+    gap: 30px;
+    justify-content: space-between;
+    width: 100%;
+    min-width: 800px;
+}
+
+.left-controls {
+    display: flex;
+    gap: 10px;
+}
+
+.game-button {
+    background: rgba(74, 144, 226, 0.1);
+    border: 2px solid rgba(74, 144, 226, 0.3);
+    border-radius: 12px;
+    color: #4a90e2;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+}
+
+.game-button:hover {
+    background: rgba(74, 144, 226, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(74, 144, 226, 0.2);
+}
+
+.game-button i {
+    font-size: 16px;
+}
+
+.inventory-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.inventory {
+    display: flex;
+    gap: 15px;
+    padding: 5px;
+    background: rgba(74, 144, 226, 0.05);
+    border-radius: 15px;
+    border: 1px solid rgba(74, 144, 226, 0.2);
+}
+
+.inventory-slot {
+    width: 60px;
+    height: 60px;
+    background: rgba(74, 144, 226, 0.1);
+    border: 2px solid rgba(74, 144, 226, 0.3);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.inventory-slot:hover {
+    background: rgba(74, 144, 226, 0.2);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(74, 144, 226, 0.2);
+}
+
+.inventory-slot.selected {
+    background: rgba(74, 144, 226, 0.3);
+    box-shadow: 0 0 20px rgba(74, 144, 226, 0.4);
+    border-color: rgba(74, 144, 226, 0.6);
+}
+
+.inventory-slot i {
+    font-size: 24px;
+    color: #4a90e2;
+}
+
+.game-hints {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.8em;
+    text-align: center;
+}
+
+.strength-controls {
+    min-width: 250px;
+    background: rgba(74, 144, 226, 0.05);
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid rgba(74, 144, 226, 0.2);
+}
+
+.slider-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    color: #4a90e2;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.slider-container input[type="range"] {
+    flex-grow: 1;
+    height: 4px;
+    background: rgba(74, 144, 226, 0.2);
+    border-radius: 2px;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+.slider-container input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    background: #4a90e2;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 0 10px rgba(74, 144, 226, 0.3);
+}
+
+.slider-container input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+    box-shadow: 0 0 15px rgba(74, 144, 226, 0.5);
+}
+
+.slider-value {
+    min-width: 50px;
+    text-align: right;
+    color: #4a90e2;
+    font-weight: 500;
+}
+
+/* Hide all content in game mode */
+body.game-mode .page,
+body.game-mode .scroll-progress,
+body.game-mode .top-menu,
+body.game-mode #scrollToTopBtn {
+    display: none !important;
+}
+
+/* Hide game UI in normal mode */
+body:not(.game-mode) .game-ui {
+    display: none !important;
+}
+
+/* Update custom cursor styles */
+.custom-cursor {
+    position: fixed;
+    width: 30px;
+    height: 30px;
+    pointer-events: none;
+    z-index: 9999;
+    display: none;
+    color: #4a90e2;
+    font-size: 20px;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+body.game-mode {
+    cursor: none;
+}
+
+body.game-mode .custom-cursor {
+    display: flex;
+}
+
+/* Ensure cursor is hidden over UI elements */
+.game-ui:hover ~ .custom-cursor {
+    display: none !important;
+}
+
+/* Add to your existing styles */
+.toggle-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 8px;
+    border-radius: 5px;
+    background: rgba(74, 144, 226, 0.1);
+}
+
+.toggle-button:hover {
+    background: rgba(74, 144, 226, 0.2);
+    transform: translateY(-2px);
+}
+
+/* Light mode adjustments for game UI */
+body.light-mode .game-ui {
+    background: rgba(255, 255, 255, 0.95);
+    border-color: rgba(74, 144, 226, 0.2);
+}
+
+body.light-mode .game-button {
+    color: #4a90e2;
+    border-color: rgba(74, 144, 226, 0.3);
+}
+
+body.light-mode .inventory-slot {
+    background: rgba(74, 144, 226, 0.05);
+    border-color: rgba(74, 144, 226, 0.3);
+}
+
+body.light-mode .game-hints {
+    color: rgba(0, 0, 0, 0.6);
+}
+
+body.light-mode .slider-container {
+    color: #4a90e2;
+}
+
+body.light-mode .slider-container input[type="range"] {
+    background: rgba(74, 144, 226, 0.1);
+}
+
+body.light-mode .custom-cursor {
+    color: #4a90e2;
+}
