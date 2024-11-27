@@ -172,7 +172,18 @@ document.addEventListener('DOMContentLoaded', () => {
             viewMore: "Mehr anzeigen",
             viewLess: "Weniger anzeigen",
             technologiesUsed: "Verwendete Technologien",
-            visitWebsite: "Website besuchen"
+            visitWebsite: "Website besuchen",
+            
+            // Updated interests
+            football: "Fussball",
+            gym: "Gym",
+            chess: "Schach",
+            jubla: "JuBla",
+            fishing: "Fischen",
+            friends: "Hinausgehen mit Freunden",
+            gaming: "Gaming",
+            programming: "Programmieren",
+            scrollDown: "Nach unten scrollen",
         },
         en: {
             // Menu items
@@ -248,7 +259,18 @@ document.addEventListener('DOMContentLoaded', () => {
             viewMore: "View More",
             viewLess: "View Less",
             technologiesUsed: "Technologies Used",
-            visitWebsite: "Visit Website"
+            visitWebsite: "Visit Website",
+            
+            // Updated interests in English
+            football: "Football",
+            gym: "Gym",
+            chess: "Chess",
+            jubla: "Youth Organization",
+            fishing: "Fishing",
+            friends: "Going out with Friends",
+            gaming: "Gaming",
+            programming: "Programming",
+            scrollDown: "Scroll Down",
         }
     };
 
@@ -314,4 +336,96 @@ document.addEventListener('DOMContentLoaded', () => {
         maxGlare: 0.1,
         reset: true
     });
+
+    // Add this to your existing JavaScript
+    window.addEventListener('scroll', () => {
+        const scrollButton = document.getElementById('scrollToTopBtn');
+        if (window.scrollY > 300) {
+            scrollButton.classList.add('visible');
+        } else {
+            scrollButton.classList.remove('visible');
+        }
+    }, { passive: true });
+
+    // Scroll to top functionality
+    document.getElementById('scrollToTopBtn').addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+
+    // Initialize EmailJS
+    (function() {
+        emailjs.init("14yz3PkbKIkqmF2j7"); // Your public key
+    })();
+
+    // Add form submission handler
+    document.getElementById('contactForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        // Show loading state
+        const submitButton = this.querySelector('button[type="submit"]');
+        const originalText = submitButton.textContent;
+        submitButton.textContent = currentLang === 'de' ? 'Senden...' : 'Sending...';
+        submitButton.disabled = true;
+
+        // Get form data
+        const formData = {
+            from_name: document.getElementById('name').value,
+            reply_to: document.getElementById('email').value,
+            message: document.getElementById('message').value,
+        };
+
+        // Send email using EmailJS
+        emailjs.send(
+            'service_0w6gwf4',     // Your service ID
+            'template_gecbcbh',   // Your template ID
+            formData
+        )
+        .then(function() {
+            // Show success message
+            alert(currentLang === 'de' ? 'Nachricht erfolgreich gesendet!' : 'Message sent successfully!');
+            
+            // Reset form
+            document.getElementById('contactForm').reset();
+            
+            // Reset button
+            submitButton.textContent = originalText;
+            submitButton.disabled = false;
+        })
+        .catch(function(error) {
+            // Show error message
+            alert(currentLang === 'de' ? 'Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es erneut.' : 'Failed to send message. Please try again.');
+            console.error('EmailJS error:', error);
+            
+            // Reset button
+            submitButton.textContent = originalText;
+            submitButton.disabled = false;
+        });
+    });
+
+    // Mouse following gradient
+    const handleMouseMove = (e) => {
+        document.documentElement.style.setProperty('--mouse-x', `${e.clientX}px`);
+        document.documentElement.style.setProperty('--mouse-y', `${e.clientY}px`);
+    };
+
+    // Only add mouse move handler on desktop
+    if (window.matchMedia('(min-width: 769px)').matches) {
+        document.addEventListener('mousemove', handleMouseMove);
+    }
+
+    // Scroll prompt functionality
+    document.querySelector('.scroll-prompt')?.addEventListener('click', () => {
+        const aboutSection = document.querySelector('#aboutme');
+        if (aboutSection) {
+            aboutSection.scrollIntoView({ behavior: 'smooth' });
+        }
+    });
+
+    // Add cursor gradient element
+    const cursorGradient = document.createElement('div');
+    cursorGradient.className = 'cursor-gradient';
+    document.body.appendChild(cursorGradient);
 });

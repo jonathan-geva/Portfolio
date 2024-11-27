@@ -105,8 +105,7 @@ section.visible {
 section:hover {
     background-color: rgba(26, 26, 26, 0.95);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3),
-                0 0 25px rgba(74, 144, 226, 0.2),
-                inset 0 0 32px rgba(74, 144, 226, 0.05);
+                0 0 25px rgba(74, 144, 226, 0.2);
     border: 1px solid rgba(74, 144, 226, 0.2);
 }
 
@@ -141,7 +140,7 @@ section.visible {
 
 h2 {
     font-size: 1.5em;
-    color: #ffffff;  /* White text for headings */
+    color: #e0e0e0;  /* White text for headings */
     margin-bottom: 10px;
 }
 
@@ -1255,7 +1254,7 @@ body.light-mode .project-tags span {
 
 /* Dropdown items styling with more padding */
 .dropdown-content a {
-    color: #e0e0e0;
+    color: #e0e0e0 !important; /* Force white color */
     padding: 12px 25px;
     text-decoration: none;
     display: block;
@@ -1266,29 +1265,24 @@ body.light-mode .project-tags span {
 }
 
 .dropdown-content a:hover {
-    color: #4a90e2;
+    color: #4a90e2 !important; /* Force blue color on hover */
     transform: translateX(5px);
     background: none !important;
 }
 
-/* Light mode - still no backgrounds */
-body.light-mode .dropdown-content a {
-    color: #333;
+/* Remove any active states */
+.dropdown-content a.active {
+    color: #e0e0e0 !important; /* Force white color even when active */
     background: none !important;
+}
+
+/* Light mode adjustments */
+body.light-mode .dropdown-content a {
+    color: #333 !important; /* Dark color for light mode */
 }
 
 body.light-mode .dropdown-content a:hover {
-    color: #4a90e2;
-    background: none !important;
-}
-
-/* Remove any active state backgrounds */
-.dropdown-content a.active {
-    background: none !important;
-}
-
-.dropdown-content a.active::before {
-    display: none; /* Remove the blue line indicator */
+    color: #4a90e2 !important; /* Blue on hover in light mode */
 }
 
 /* Control buttons styling */
@@ -1412,7 +1406,7 @@ html {
 section h2 {
     font-size: 1.5em;
     margin-bottom: 20px;
-    color: #ffffff;
+    color: #e0e0e0;
     position: relative;
     display: inline-block;
 }
@@ -1460,23 +1454,50 @@ body.light-mode section h2::after {
     position: relative;
     display: inline-block;
     cursor: pointer;
+    background: none;  /* No background by default */
 }
 
-/* Hover effects */
+/* Hover effects in dark mode */
 .menu-item a:hover,
-.menu-item span#themeToggle:hover {
-    color: #4a90e2;
+.menu-item span#themeToggle:hover,
+.menu-item span#languageToggle:hover {
+    color: #4a90e2;  /* Blue on hover */
     background: rgba(74, 144, 226, 0.1);
     transform: translateY(-2px);
 }
 
-/* Special hover for language toggle - no background */
-.menu-item span#languageToggle:hover {
-    color: #4a90e2;
-    transform: translateY(-2px);
+/* Dropdown items in dark mode */
+.dropdown-content a {
+    color: #e0e0e0 !important; /* Force white color */
+    padding: 12px 25px;
+    text-decoration: none;
+    display: block;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    background: none !important;
+    margin: 2px 0;
 }
 
-/* Light mode styles */
+.dropdown-content a:hover {
+    color: #4a90e2 !important; /* Force blue color on hover */
+    transform: translateX(5px);
+    background: none !important;
+}
+
+/* Active state for menu items */
+.menu-item.active a {
+    color: #4a90e2;  /* Blue text color */
+    background: rgba(74, 144, 226, 0.15);  /* Light blue background */
+    box-shadow: 0 0 20px rgba(74, 144, 226, 0.1);  /* Subtle glow */
+}
+
+/* Active state for dropdown items */
+.dropdown-content a.active {
+    color: #e0e0e0 !important; /* Force white color even when active */
+    background: none !important;
+}
+
+/* Light mode adjustments remain the same */
 body.light-mode .menu-item a,
 body.light-mode .menu-item span#themeToggle,
 body.light-mode .menu-item span#languageToggle {
@@ -1576,4 +1597,267 @@ body.light-mode .contact-form button[type="submit"] {
 
 body.light-mode .contact-form button[type="submit"]:hover {
     background: rgba(74, 144, 226, 0.2);
+}
+
+/* Keep active state for main menu items */
+.menu-item.active > a {  /* Using > to only target direct child links */
+    color: #4a90e2;
+    background: rgba(74, 144, 226, 0.15);
+    box-shadow: 0 0 20px rgba(74, 144, 226, 0.1);
+}
+
+/* Remove active states from dropdown items */
+.dropdown-content a {
+    color: #e0e0e0;
+    padding: 12px 25px;
+    text-decoration: none;
+    display: block;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    background: none !important;
+    margin: 2px 0;
+}
+
+.dropdown-content a:hover {
+    color: #4a90e2;
+    transform: translateX(5px);
+    background: none !important;
+}
+
+/* Remove all active states from dropdown items */
+.dropdown-content a.active {
+    color: #e0e0e0 !important; /* Force white color even when active */
+    background: none !important;
+}
+
+/* Light mode adjustments */
+body.light-mode .dropdown-content a {
+    color: #333 !important; /* Dark color for light mode */
+}
+
+body.light-mode .dropdown-content a:hover {
+    color: #4a90e2 !important; /* Blue on hover in light mode */
+}
+
+/* Mobile menu styles */
+@media (max-width: 768px) {
+    /* Adjust top menu for mobile */
+    .top-menu {
+        min-width: 90%;
+        padding: 10px 15px;
+        top: 15px;
+    }
+
+    /* Adjust menu container for mobile */
+    .menu-container {
+        gap: 10px;
+    }
+
+    /* Adjust menu items for mobile */
+    .menu-item a,
+    .menu-item span#themeToggle,
+    .menu-item span#languageToggle {
+        font-size: 14px;
+        padding: 6px 10px;
+    }
+
+    /* Adjust dropdown positioning for mobile */
+    .dropdown-content {
+        position: fixed;
+        left: 5%;
+        width: 90%;
+        transform: translateY(15px);
+        top: 60px; /* Adjust based on your menu height */
+    }
+
+    .dropdown:hover .dropdown-content {
+        transform: translateY(10px);
+        left: 5%;
+    }
+
+    /* Make dropdown items more touch-friendly */
+    .dropdown-content a {
+        padding: 15px 20px;
+        font-size: 16px;
+    }
+
+    /* Ensure menu stays visible on mobile */
+    .top-menu.hidden {
+        transform: translate(-50%, 0);
+        opacity: 1;
+    }
+
+    /* Adjust container padding for mobile */
+    .container {
+        margin-top: 80px;
+        padding: 15px;
+    }
+
+    /* Make sections more compact on mobile */
+    section {
+        padding: 15px;
+        margin-top: 15px;
+    }
+
+    /* Adjust text sizes for mobile */
+    h2 {
+        font-size: 1.3em;
+    }
+
+    .profile-info h1 {
+        font-size: 1.5em;
+    }
+
+    .profile-info p {
+        font-size: 0.9em;
+    }
+
+    /* Add touch-friendly hover states */
+    @media (hover: none) {
+        .menu-item a:active,
+        .menu-item span:active {
+            color: #4a90e2;
+            background: rgba(74, 144, 226, 0.1);
+        }
+
+        .dropdown-content a:active {
+            color: #4a90e2;
+            transform: translateX(5px);
+        }
+    }
+}
+
+/* Landing page styles */
+.landing-section {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.landing-content {
+    text-align: center;
+    z-index: 2;
+}
+
+.landing-title {
+    font-size: 4em;
+    margin-bottom: 2rem;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+.gradient-text {
+    background: linear-gradient(
+        45deg,
+        #4a90e2,
+        #357abd,
+        #4a90e2,
+        #357abd
+    );
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: gradientFlow 3s ease infinite;
+}
+
+.scroll-prompt {
+    margin-bottom: 5rem;
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    opacity: 0;
+    animation: fadeIn 0.8s ease forwards 1s;
+}
+
+.scroll-prompt span {
+    font-size: 1.2em;
+    color: #e0e0e0;
+}
+
+.scroll-prompt i {
+    font-size: 1.5em;
+    color: #4a90e2;
+    animation: bounce 2s infinite;
+}
+
+/* Mouse following gradient */
+.cursor-gradient {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: radial-gradient(
+        600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+        rgba(74, 144, 226, 0.15),
+        transparent 40%
+    );
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Animations */
+@keyframes gradientFlow {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-10px);
+    }
+    60% {
+        transform: translateY(-5px);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Light mode adjustments */
+body.light-mode .landing-title {
+    color: #333;
+}
+
+body.light-mode .scroll-prompt span {
+    color: #666;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .landing-title {
+        font-size: 2.5em;
+    }
+    
+    .cursor-gradient {
+        display: none;
+    }
 }

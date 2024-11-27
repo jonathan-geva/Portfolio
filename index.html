@@ -52,6 +52,17 @@
 
     <!-- About Me Page -->
     <div class="page" id="aboutme-page">
+      <div class="landing-section">
+        <div class="landing-content">
+          <h1 class="landing-title">
+            Hi, I'm <span class="gradient-text">Jonathan</span>
+          </h1>
+          <div class="scroll-prompt">
+            <span data-translate="scrollDown">Scroll Down</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+        </div>
+      </div>
       <div class="container">
         <header class="header" id="aboutme">
           <img
@@ -107,17 +118,11 @@
         <section id="skills">
           <h2 data-translate="skills">Fähigkeiten</h2>
           <div class="skills-pool">
-            <span>Scratch</span>
-            <span>HTML</span>
-            <span>CSS</span>
-            <span>JavaScript Basics</span>
-            <span>Java Basics</span>
-            <span data-translate="photoEditing">Fotos bearbeiten</span>
-            <span data-translate="videoEditing">Videos schneiden</span>
-            <span data-translate="blenderBasics">Blender Basics</span>
-            <span data-translate="creativity">Kreativität</span>
-            <span>Mindnode</span>
-            <span data-translate="msOffice">Microsoft Office Programme</span>
+            <span>HTML, CSS</span>
+            <span>JavaScript - Basics</span>
+            <span>RPA mit UiPath</span>
+            <span>GitHub, Git - Basics</span>
+            <span>MySQL - Basics</span>
           </div>
         </section>
         
@@ -142,12 +147,14 @@
         <section id="personal">
           <h2 data-translate="interests">Persönliche Interessen</h2>
           <ul>
+            <li><i class="fas fa-futbol"></i> <span data-translate="football">Fussball</span></li>
+            <li><i class="fas fa-dumbbell"></i> <span data-translate="gym">Gym</span></li>
             <li><i class="fas fa-chess"></i> <span data-translate="chess">Schach</span></li>
-            <li><i class="fas fa-basketball-ball"></i> <span data-translate="sports">Basketball/Fußball</span></li>
-            <li><i class="fas fa-robot"></i> <span data-translate="robotics">EV3 Legoroboter (World Robot Olympiad 2023 & 2024)</span></li>
-            <li><i class="fas fa-skiing"></i> <span data-translate="skiing">Skifahren</span></li>
-            <li><i class="fas fa-code"></i> <span data-translate="programming">Programmieren</span></li>
+            <li><i class="fas fa-users"></i> <span data-translate="jubla">JuBla</span></li>
             <li><i class="fas fa-fish"></i> <span data-translate="fishing">Fischen</span></li>
+            <li><i class="fas fa-user-friends"></i> <span data-translate="friends">Hinausgehen mit Freunden</span></li>
+            <li><i class="fas fa-gamepad"></i> <span data-translate="gaming">Gaming</span></li>
+            <li><i class="fas fa-code"></i> <span data-translate="programming">Programmieren</span></li>
           </ul>
         </section>
         
@@ -172,7 +179,6 @@
     <div class="page" id="projects-page">
       <div class="container">
         <section id="projects">
-          <h2 data-translate="projectsTitle">Projects</h2>
           <div class="project-grid">
             <div class="project-card">
               <div class="project-image">
@@ -202,17 +208,17 @@
       <div class="container">
         <section id="contact">
           <h2 data-translate="contactMe">Contact Me</h2>
-          <form class="contact-form">
+          <form class="contact-form" id="contactForm">
             <div class="form-group">
-              <input type="text" id="name" required>
+              <input type="text" id="name" name="name" required>
               <label for="name" data-translate="name">Name</label>
             </div>
             <div class="form-group">
-              <input type="email" id="email" required>
+              <input type="email" id="email" name="email" required>
               <label for="email" data-translate="email">Email</label>
             </div>
             <div class="form-group">
-              <textarea id="message" required></textarea>
+              <textarea id="message" name="message" required></textarea>
               <label for="message" data-translate="message">Message</label>
             </div>
             <button type="submit" data-translate="send">Send Message</button>
@@ -225,5 +231,6 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tilt.js/1.2.1/tilt.jquery.min.js"></script>
     <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
   </body>
 </html>
