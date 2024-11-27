@@ -1,4 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Initialize particle system
+    const particleSystem = new ParticleSystem();
+    document.body.appendChild(particleSystem.canvas);
+
     // Initialize pages
     const pages = {
         'aboutme': document.getElementById('aboutme-page'),
@@ -89,11 +93,13 @@ document.addEventListener('DOMContentLoaded', () => {
             icon.classList.replace('fa-sun', 'fa-moon');
         }
         localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light-mode' : 'dark-mode');
+        particleSystem.setLightMode(document.body.classList.contains('light-mode'));
     });
 
     // Initialize theme from localStorage
     if (localStorage.getItem('theme') === 'light-mode') {
         themeToggle.click();
+        particleSystem.setLightMode(true);
     }
 
     // Language toggle functionality
